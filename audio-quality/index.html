@@ -1,0 +1,164 @@
+<html lang="en">
+
+<head>
+	<title>Audio Quality Tester</title>
+	<script type="text/javascript">
+		const startTime = 35.5;
+
+		document.addEventListener('DOMContentLoaded', () => {
+			let current = document.getElementById('mp3_64-audio');
+			current.currentTime = startTime;
+			const switchTo = (to) => {
+				const player = document.getElementById(`${to}-audio`);
+				player.currentTime = current.currentTime;
+				current.pause();
+				current = player;
+				current.play();
+
+				document.querySelectorAll('[id$="-box"]').forEach(b => b.style = '');
+				document.getElementById(`${to}-box`).style = 'font-weight: bold';
+			}
+			document.querySelectorAll('[id$="-play"]').forEach(e => e.addEventListener('click', _ => switchTo(e.id.substring(0, e.id.length - 5))))
+			document.getElementById("pause").addEventListener('click', () => {
+				current.pause();
+				document.querySelectorAll('[id$="-box"]').forEach(b => b.style = '');
+			});
+			document.getElementById("skip-ff").addEventListener('click', () => current.currentTime += 5);
+			document.getElementById("skip-rr").addEventListener('click', () => current.currentTime -= 5);
+			document.getElementById("reset").addEventListener('click', () => current.currentTime = startTime);
+		});
+	</script>
+</head>
+
+<body>
+	<h1>Audio Quality Tester</h1>
+	<button id="pause">PAUSE</button>
+	<button id="skip-rr">&lt;&lt; -5s</button>
+	<button id="skip-ff">+5s &gt;&gt;</button>
+	<button id="reset">RESET TIME</button>
+	<hr />
+	<table>
+		<tr id="mp3_64-box">
+			<td>
+				<button id="mp3_64-play">PLAY</button>
+				<audio controls preload style="display:none" id="mp3_64-audio">
+					<source src="9789180247344-64kbps.mp3" type="audio/mpeg">
+					Not supported
+				</audio>
+			</td>
+			<td>MP3 64kbps, mono, 44.1kHz</td>
+		</tr>
+		<tr id="mp3_128-box">
+			<td>
+				<button id="mp3_128-play">PLAY</button>
+				<audio controls preload style="display:none" id="mp3_128-audio">
+					<source src="9789180247344-128kbps.mp3" type="audio/mpeg">
+					Not supported
+				</audio>
+			</td>
+			<td>MP3 128kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="mp3_160-box">
+			<td>
+				<button id="mp3_160-play">PLAY</button>
+				<audio controls preload style="display:none" id="mp3_160-audio">
+					<source src="9789180247344-160kbps.mp3" type="audio/mpeg">
+					Not supported
+				</audio>
+			</td>
+			<td>MP3 160kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_64-box">
+			<td>
+				<button id="aac_64-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_64-audio">
+					<source src="9789180247344-64kbps.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC 64kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_128-box">
+			<td>
+				<button id="aac_128-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_128-audio">
+					<source src="9789180247344-128kbps.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC 128kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_160-box">
+			<td>
+				<button id="aac_160-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_160-audio">
+					<source src="9789180247344-160kbps.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC 160kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_64_at-box">
+			<td>
+				<button id="aac_64_at-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_64_at-audio">
+					<source src="9789180247344-64kbps-at.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC (AT encoder) 64kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_128_at-box">
+			<td>
+				<button id="aac_128_at-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_128_at-audio">
+					<source src="9789180247344-128kbps-at.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC (AT encoder) 128kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="aac_160_at-box">
+			<td>
+				<button id="aac_160_at-play">PLAY</button>
+				<audio controls preload style="display:none" id="aac_160_at-audio">
+					<source src="9789180247344-160kbps-at.aac" type="audio/mp4">
+					Not supported
+				</audio>
+			</td>
+			<td>AAC-LC (AT encoder) 160kbps, stereo, 44.1kHz</td>
+		</tr>
+		<tr id="opus_64-box">
+			<td>
+				<button id="opus_64-play">PLAY</button>
+				<audio controls preload style="display:none" id="opus_64-audio">
+					<source src="9789180247344-64kbps.opus" type="audio/ogg">
+					Not supported
+				</audio>
+			</td>
+			<td>Opus 64kbps, stereo, 48kHz</td>
+		</tr>
+		<tr id="opus_128-box">
+			<td>
+				<button id="opus_128-play">PLAY</button>
+				<audio controls preload style="display:none" id="opus_128-audio">
+					<source src="9789180247344-128kbps.opus" type="audio/ogg">
+					Not supported
+				</audio>
+			</td>
+			<td>Opus 128kbps, stereo, 48kHz</td>
+		</tr>
+		<tr id="opus_160-box">
+			<td>
+				<button id="opus_160-play">PLAY</button>
+				<audio controls preload style="display:none" id="opus_160-audio">
+					<source src="9789180247344-160kbps.opus" type="audio/ogg">
+					Not supported
+				</audio>
+			</td>
+			<td>Opus 160kbps, stereo, 48kHz</td>
+		</tr>
+	</table>
+</body>
+
+</html>
